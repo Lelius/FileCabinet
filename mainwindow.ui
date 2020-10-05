@@ -547,14 +547,14 @@
      <height>25</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menu_1">
+   <widget class="QMenu" name="menuListFileDatabase">
     <property name="title">
      <string>Картотека</string>
     </property>
-    <addaction name="action_1_1"/>
-    <addaction name="actionListFileSystem"/>
-    <addaction name="action_3"/>
-    <addaction name="action"/>
+    <addaction name="actionNewListFileDatabase"/>
+    <addaction name="actionOpenListFileDatabase"/>
+    <addaction name="actionCloseListFileDatabase"/>
+    <addaction name="actionReserveListFileDatabase"/>
     <addaction name="actionExitTheProgram"/>
    </widget>
    <widget class="QMenu" name="menu_2">
@@ -583,7 +583,7 @@
     </property>
     <addaction name="actionListCard"/>
    </widget>
-   <addaction name="menu_1"/>
+   <addaction name="menuListFileDatabase"/>
    <addaction name="menuList"/>
    <addaction name="menu_4"/>
    <addaction name="menu"/>
@@ -591,17 +591,17 @@
    <addaction name="menu_2"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
-  <action name="action_1_1">
+  <action name="actionNewListFileDatabase">
    <property name="text">
     <string>Новая</string>
    </property>
   </action>
-  <action name="actionListFileSystem">
+  <action name="actionOpenListFileDatabase">
    <property name="text">
     <string>Открыть</string>
    </property>
   </action>
-  <action name="action">
+  <action name="actionReserveListFileDatabase">
    <property name="text">
     <string>Резервная копия</string>
    </property>
@@ -611,7 +611,7 @@
     <string>Выход</string>
    </property>
   </action>
-  <action name="action_3">
+  <action name="actionCloseListFileDatabase">
    <property name="text">
     <string>Закрыть</string>
    </property>

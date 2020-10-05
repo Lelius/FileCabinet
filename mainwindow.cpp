@@ -13,10 +13,10 @@ MainWindow::MainWindow(QWidget *parent)
     model->setRootPath(QDir::currentPath());
     ui->treeViewFileSystem->setModel(model);
 
-    connect  (ui->actionExitTheProgram, &QAction::triggered, [=]() {setCurrentIndexInStackWidget(1);} );
+    connect ( ui->actionExitTheProgram, &QAction::triggered, [=]() {setCurrentIndexInStackWidget(1);} );
     connect ( ui->pushButtonYes, &QPushButton::clicked, [=]() {MainWindow::close();});
     connect ( ui->pushButtonNo, &QPushButton::clicked, [=]() {returnPreviousIndexInStackWidget();} );
-    connect ( ui->actionListFileSystem, &QAction::triggered, [=]() {setCurrentIndexInStackWidget(2);} );
+    connect ( ui->actionOpenListFileDatabase, &QAction::triggered, [=]() {setCurrentIndexInStackWidget(2);} );
     connect ( ui->actionListCard, &QAction::triggered, [=]() {setCurrentIndexInStackWidget(0);} );
 }
 
