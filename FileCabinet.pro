@@ -17,10 +17,12 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    mytablewidget.cpp
 
 HEADERS += \
-    mainwindow.h
+    mainwindow.h \
+    mytablewidget.h
 
 FORMS += \
     mainwindow.ui

@@ -23,6 +23,8 @@ private slots:
     void setCurrentIndexInStackWidget(int);
     void returnPreviousIndexInStackWidget();
 
+    void setMyTableWidgetHoverSize(int, bool);
+
 private:
     Ui::MainWindow *ui;
     int previousIndex;
