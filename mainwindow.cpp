@@ -9,6 +9,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     setPreviousIndex(0);
 
+    initSystemTray();
+
     QFileSystemModel *model = new QFileSystemModel;
     model->setRootPath(QDir::currentPath());
     ui->treeViewFileSystem->setModel(model);
@@ -46,3 +48,37 @@ void MainWindow::setPreviousIndex(int value)
     previousIndex = value;
 }
 
+void MainWindow::initSystemTray()
+{
+    trayIcon = new QSystemTrayIcon(this);
+    trayIcon->setIcon(QIcon(":/new/prefix1/arhiv.png"));
+
+    QMenu *menuTrayIcon = new QMenu(this);
+    QAction *actShowHide = new QAction("Показать/Спрятать", this);
+    QAction *actCloseTheProgramm = new QAction("Выход", this);
+    menuTrayIcon->addAction(actShowHide);
+    menuTrayIcon->addAction(actCloseTheProgramm);
+    trayIcon->setToolTip("Картотека");
+    trayIcon->setContextMenu(menuTrayIcon);
+    trayIcon->show();
+
+    connect(actShowHide, &QAction::triggered, [=]() {this->isVisible() ? this->setVisible(false) : this->setVisible(true);} );
+    connect(actCloseTheProgramm, &QAction::triggered, [=]() {this->close();} );
+    connect(trayIcon, &QSystemTrayIcon::activated, [=](QSystemTrayIcon::ActivationReason reason) {if (reason == QSystemTrayIcon::DoubleClick) {this->show();} } );
+}
+
+void MainWindow::closeEvent(QCloseEvent *event)
+{
+    #ifdef Q_OS_MACOS
+    if (!event->spontaneous() || !isVisible()) {
+        return;
+    }
+    #endif
+
+    if (this->isVisible()) {
+        trayIcon->showMessage(tr("Картотека"),
+                                 tr("Программа свернута, но остается в рабочем состоянии."));
+        hide();
+        event->ignore();
+    }
+}

@@ -3,6 +3,9 @@
 
 #include <QMainWindow>
 #include <QFileSystemModel>
+#include <QSystemTrayIcon>
+#include <QCloseEvent>
+#include <QMessageBox>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -14,7 +17,7 @@ class MainWindow : public QMainWindow
 
 public:
     MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+    ~MainWindow() override;
 
     int getPreviousIndex() const;
     void setPreviousIndex(int value);
@@ -23,8 +26,15 @@ private slots:
     void setCurrentIndexInStackWidget(int);
     void returnPreviousIndexInStackWidget();
 
+    void initSystemTray();
+
+protected:
+    void closeEvent(QCloseEvent *) override;
+
 private:
     Ui::MainWindow *ui;
     int previousIndex;
+
+    QSystemTrayIcon *trayIcon;
 };
 #endif // MAINWINDOW_H
