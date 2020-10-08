@@ -16,7 +16,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->treeViewFileSystem->setModel(model);
 
     connect ( ui->actionExitTheProgram, &QAction::triggered, [=]() {setCurrentIndexInStackWidget(1);} );
-    connect ( ui->pushButtonYes, &QPushButton::clicked, [=]() {MainWindow::close();});
+    connect ( ui->pushButtonYes, &QPushButton::clicked, [=]() {MainWindow::hide(); MainWindow::close();}); //closeEvent переопределен
     connect ( ui->pushButtonNo, &QPushButton::clicked, [=]() {returnPreviousIndexInStackWidget();} );
     connect ( ui->actionOpenListFileDatabase, &QAction::triggered, [=]() {setCurrentIndexInStackWidget(2);} );
     connect ( ui->actionListCard, &QAction::triggered, [=]() {setCurrentIndexInStackWidget(0);} );
