@@ -63,9 +63,12 @@ void MainWindow::initSystemTray()
     trayIcon->show();
 
     connect(actShowHide, &QAction::triggered, [=]() {this->isVisible() ? this->setVisible(false) : this->setVisible(true);} );
-    connect(actCloseTheProgramm, &QAction::triggered, [=]() {this->close();} );
-    connect(trayIcon, &QSystemTrayIcon::activated, [=](QSystemTrayIcon::ActivationReason reason) {if (reason == QSystemTrayIcon::DoubleClick)
-                                                                                                    {this->isVisible() ? this->hide() : this->show();} } );
+    connect(actCloseTheProgramm, &QAction::triggered, [=]() {this->hide(); this->close();} );
+    connect(trayIcon, &QSystemTrayIcon::activated, [=](QSystemTrayIcon::ActivationReason reason)
+                                                        {if (reason == QSystemTrayIcon::DoubleClick)
+                                                            {this->isVisible() ? this->hide() : this->show();} } );
+
+    //TODO: при видимом окне Выход в трее не закрывает, а сворачивает окно
 }
 
 void MainWindow::closeEvent(QCloseEvent *event)
@@ -78,8 +81,8 @@ void MainWindow::closeEvent(QCloseEvent *event)
 
     if (this->isVisible()) {
         trayIcon->showMessage(tr("Картотека"),
-                                 tr("Программа свернута, но остается в рабочем состоянии."), trayIcon->icon(), 2000);
-        hide();
+                                 tr("Программа свернута, но остается в рабочем состоянии."), trayIcon->icon(), (int) 3000);
+        MainWindow::hide();
         event->ignore();
     }
 }
