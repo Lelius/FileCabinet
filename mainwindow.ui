@@ -233,7 +233,7 @@
                 </widget>
                </item>
                <item row="1" column="0">
-                <widget class="QTableWidget" name="tableWidgetChangeAccounting">
+                <widget class="MyTableWidget" name="tableWidgetChangeAccounting">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                    <horstretch>0</horstretch>
@@ -256,7 +256,7 @@
                 </widget>
                </item>
                <item row="3" column="0">
-                <widget class="QTableWidget" name="tableWidgetApplicability">
+                <widget class="MyTableWidget" name="tableWidgetApplicability">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                    <horstretch>0</horstretch>
@@ -266,7 +266,7 @@
                 </widget>
                </item>
                <item row="1" column="1">
-                <widget class="QTableWidget" name="tableWidgetIssuanceOfCopies">
+                <widget class="MyTableWidget" name="tableWidgetIssuanceOfCopies">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                    <horstretch>0</horstretch>
@@ -302,7 +302,7 @@
                 </widget>
                </item>
                <item row="3" column="1">
-                <widget class="QTableWidget" name="tableWidgetCopyAccounting">
+                <widget class="MyTableWidget" name="tableWidgetCopyAccounting">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                    <horstretch>0</horstretch>
@@ -629,5 +629,13 @@
  <resources>
   <include location="resource.qrc"/>
  </resources>
+ <customwidgets>
+  <customwidget>
+   <class>MyTableWidget</class>
+   <extends>QTableWidget</extends>
+   <header>mytablewidget.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
  <connections/>
 </ui>
