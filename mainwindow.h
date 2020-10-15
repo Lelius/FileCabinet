@@ -31,7 +31,6 @@ private slots:
 protected:
     void closeEvent(QCloseEvent *) override;
 
-    void setMyTableWidgetHoverSize(int, bool);
 
 private:
     Ui::MainWindow *ui;

@@ -114,7 +114,7 @@
                <item row="4" column="1" colspan="3">
                 <widget class="QTextEdit" name="textEditComment">
                  <property name="sizePolicy">
-                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Expanding">
+                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
                    <horstretch>0</horstretch>
                    <verstretch>0</verstretch>
                   </sizepolicy>
@@ -211,7 +211,7 @@
           <item row="2" column="2">
            <widget class="QWidget" name="widgetSideBListCard" native="true">
             <property name="sizePolicy">
-             <sizepolicy hsizetype="MinimumExpanding" vsizetype="Maximum">
+             <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
@@ -219,96 +219,67 @@
             <layout class="QVBoxLayout" name="verticalLayout_4">
              <item>
               <layout class="QGridLayout" name="gridLayoutSideBListCard">
-               <item row="0" column="1">
-                <widget class="QLabel" name="labelIssuanceOfCopies">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="text">
-                  <string>Выдача копий</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="0">
-                <widget class="MyTableWidget" name="tableWidgetChangeAccounting">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                </widget>
-               </item>
                <item row="2" column="0">
-                <widget class="QLabel" name="labelApplicability">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
+                <widget class="QToolBox" name="toolBox">
+                 <property name="currentIndex">
+                  <number>0</number>
                  </property>
-                 <property name="text">
-                  <string>Применение</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="0">
-                <widget class="MyTableWidget" name="tableWidgetApplicability">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="1">
-                <widget class="MyTableWidget" name="tableWidgetIssuanceOfCopies">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="0">
-                <widget class="QLabel" name="labelChangeAccounting">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="text">
-                  <string>Изменения</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="1">
-                <widget class="QLabel" name="labelCopyAccounting">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="text">
-                  <string>Учет копий</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="1">
-                <widget class="MyTableWidget" name="tableWidgetCopyAccounting">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
+                 <widget class="QWidget" name="page">
+                  <property name="geometry">
+                   <rect>
+                    <x>0</x>
+                    <y>0</y>
+                    <width>458</width>
+                    <height>174</height>
+                   </rect>
+                  </property>
+                  <attribute name="label">
+                   <string>Page 1</string>
+                  </attribute>
+                  <layout class="QVBoxLayout" name="verticalLayout_5">
+                   <item>
+                    <widget class="QTableWidget" name="tableWidget"/>
+                   </item>
+                  </layout>
+                 </widget>
+                 <widget class="QWidget" name="page_2">
+                  <property name="geometry">
+                   <rect>
+                    <x>0</x>
+                    <y>0</y>
+                    <width>458</width>
+                    <height>174</height>
+                   </rect>
+                  </property>
+                  <attribute name="label">
+                   <string>Page 2</string>
+                  </attribute>
+                  <layout class="QVBoxLayout" name="verticalLayout_6">
+                   <item>
+                    <widget class="QTableWidget" name="tableWidget_2"/>
+                   </item>
+                  </layout>
+                 </widget>
+                 <widget class="QWidget" name="page_3">
+                  <attribute name="label">
+                   <string>Страница</string>
+                  </attribute>
+                  <layout class="QVBoxLayout" name="verticalLayout_7">
+                   <item>
+                    <widget class="QTableWidget" name="tableWidget_3"/>
+                   </item>
+                  </layout>
+                 </widget>
+                 <widget class="QWidget" name="page_4">
+                  <attribute name="label">
+                   <string>Страница</string>
+                  </attribute>
+                  <layout class="QVBoxLayout" name="verticalLayout_8">
+                   <item>
+                    <widget class="QTableWidget" name="tableWidget_4"/>
+                   </item>
+                  </layout>
+                 </widget>
                 </widget>
                </item>
               </layout>
@@ -629,13 +600,5 @@
  <resources>
   <include location="resource.qrc"/>
  </resources>
- <customwidgets>
-  <customwidget>
-   <class>MyTableWidget</class>
-   <extends>QTableWidget</extends>
-   <header>mytablewidget.h</header>
-  </customwidget>
- </customwidgets>
- <resources/>
  <connections/>
 </ui>
