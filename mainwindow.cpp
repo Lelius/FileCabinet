@@ -118,14 +118,12 @@ void MainWindow::closeEvent(QCloseEvent *event)
 void MainWindow::on_listViewFileSystem_doubleClicked(const QModelIndex &index)
 {
     QFileInfo fileInfo = fileSystemModel->fileInfo(index);
+    QString stringFileSystem = "";
+    QDir dir = fileInfo.dir();
 
     if (fileInfo.fileName() == "..") {
-        QDir dir = fileInfo.dir();
         dir.cdUp();
         ui->listViewFileSystem->setRootIndex(fileSystemModel->index(dir.absolutePath()));
-
-        ui->lineEditFileSystem->clear();
-        ui->lineEditFileSystem->setText(dir.absolutePath());
     }
     else if (fileInfo.fileName() == ".") {
         ui->listViewFileSystem->setRootIndex(fileSystemModel->index(""));
@@ -133,4 +131,8 @@ void MainWindow::on_listViewFileSystem_doubleClicked(const QModelIndex &index)
     else if (fileInfo.isDir()) {
         ui->listViewFileSystem->setRootIndex(index);
     }
+
+    ui->lineEditFileSystem->clear();
+    fileInfo = fileSystemModel->fileInfo(ui->listViewFileSystem->rootIndex());
+    ui->lineEditFileSystem->setText(fileInfo.absoluteFilePath());
 }
