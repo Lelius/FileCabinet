@@ -33,7 +33,7 @@
        </sizepolicy>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="pageListCard">
        <property name="sizePolicy">
@@ -229,8 +229,8 @@
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>450</width>
-                    <height>212</height>
+                    <width>107</width>
+                    <height>107</height>
                    </rect>
                   </property>
                   <attribute name="label">
@@ -247,8 +247,8 @@
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>450</width>
-                    <height>212</height>
+                    <width>107</width>
+                    <height>107</height>
                    </rect>
                   </property>
                   <attribute name="label">
@@ -265,8 +265,8 @@
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>450</width>
-                    <height>212</height>
+                    <width>107</width>
+                    <height>107</height>
                    </rect>
                   </property>
                   <attribute name="label">
@@ -283,8 +283,8 @@
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>450</width>
-                    <height>212</height>
+                    <width>107</width>
+                    <height>107</height>
                    </rect>
                   </property>
                   <attribute name="label">
@@ -520,8 +520,11 @@
       </widget>
       <widget class="QWidget" name="pageFileSystem">
        <layout class="QGridLayout" name="gridLayout_4">
+        <item row="1" column="0">
+         <widget class="QListView" name="listViewFileSystem"/>
+        </item>
         <item row="0" column="0">
-         <widget class="QTreeView" name="treeViewFileSystem"/>
+         <widget class="QLineEdit" name="lineEditFileSystem"/>
         </item>
        </layout>
       </widget>

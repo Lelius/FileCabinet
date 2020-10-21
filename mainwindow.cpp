@@ -10,21 +10,15 @@ MainWindow::MainWindow(QWidget *parent)
     setPreviousIndex(0);
 
     initSystemTray();
-
-    ui->toolBox->setItemText(0, "Выдача копий");
-    ui->toolBox->setItemText(1, "Учет копий");
-    ui->toolBox->setItemText(2, "Учет изменений");
-    ui->toolBox->setItemText(3, "Применяемость");
-
-    QFileSystemModel *model = new QFileSystemModel;
-    model->setRootPath(QDir::currentPath());
-    ui->treeViewFileSystem->setModel(model);
+    initToolBoxHeaders();
+    initFileSystemModel();
 
     connect ( ui->actionExitTheProgram, &QAction::triggered, [=]() {setCurrentIndexInStackWidget(1);} );
     connect ( ui->pushButtonYes, &QPushButton::clicked, [=]() {MainWindow::hide(); MainWindow::close();}); //closeEvent переопределен
     connect ( ui->pushButtonNo, &QPushButton::clicked, [=]() {returnPreviousIndexInStackWidget();} );
     connect ( ui->actionOpenListFileDatabase, &QAction::triggered, [=]() {setCurrentIndexInStackWidget(2);} );
     connect ( ui->actionListCard, &QAction::triggered, [=]() {setCurrentIndexInStackWidget(0);} );
+    connect ( ui->listViewFileSystem, &QListView::doubleClicked, this, &MainWindow::on_listViewFileSystem_doubleClicked );
 
 }
 
@@ -59,6 +53,7 @@ void MainWindow::setPreviousIndex(int value)
     previousIndex = value;
 }
 
+
 void MainWindow::initSystemTray()
 {
     trayIcon = new QSystemTrayIcon(this);
@@ -77,8 +72,31 @@ void MainWindow::initSystemTray()
     connect(actCloseTheProgramm, &QAction::triggered, [=]() {this->hide(); this->close();} );
     connect(trayIcon, &QSystemTrayIcon::activated, [=](QSystemTrayIcon::ActivationReason reason)
                                                         {if (reason == QSystemTrayIcon::DoubleClick)
-                                                            {this->isVisible() ? this->hide() : this->show();} } );
+        {this->isVisible() ? this->hide() : this->show();} } );
 }
+
+
+void MainWindow::initToolBoxHeaders()
+{
+    ui->toolBox->setItemText(0, "Выдача копий");
+    ui->toolBox->setItemText(1, "Учет копий");
+    ui->toolBox->setItemText(2, "Учет изменений");
+    ui->toolBox->setItemText(3, "Применяемость");
+}
+
+
+void MainWindow::initFileSystemModel()
+{
+    fileSystemModel = new QFileSystemModel(this);
+    fileSystemModel->setFilter(QDir::QDir::AllEntries);
+    fileSystemModel->setRootPath(QDir::currentPath());
+    ui->listViewFileSystem->setModel(fileSystemModel);
+    ui->listViewFileSystem->setRootIndex(fileSystemModel->index(QDir::currentPath()));
+
+    ui->lineEditFileSystem->setText(QDir::currentPath());
+    ui->lineEditFileSystem->setReadOnly(true);
+}
+
 
 void MainWindow::closeEvent(QCloseEvent *event)
 {
@@ -93,5 +111,26 @@ void MainWindow::closeEvent(QCloseEvent *event)
                                  tr("Программа свернута, но остается в рабочем состоянии."), trayIcon->icon(), 3000);
         MainWindow::hide();
         event->ignore();
+    }
+}
+
+
+void MainWindow::on_listViewFileSystem_doubleClicked(const QModelIndex &index)
+{
+    QFileInfo fileInfo = fileSystemModel->fileInfo(index);
+
+    if (fileInfo.fileName() == "..") {
+        QDir dir = fileInfo.dir();
+        dir.cdUp();
+        ui->listViewFileSystem->setRootIndex(fileSystemModel->index(dir.absolutePath()));
+
+        ui->lineEditFileSystem->clear();
+        ui->lineEditFileSystem->setText(dir.absolutePath());
+    }
+    else if (fileInfo.fileName() == ".") {
+        ui->listViewFileSystem->setRootIndex(fileSystemModel->index(""));
+    }
+    else if (fileInfo.isDir()) {
+        ui->listViewFileSystem->setRootIndex(index);
     }
 }
