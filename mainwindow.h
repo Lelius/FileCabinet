@@ -8,6 +8,8 @@
 #include <QMessageBox>
 #include <QDir>
 #include <QFileInfo>
+#include <QSortFilterProxyModel>
+#include <QModelIndex>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -32,7 +34,7 @@ private slots:
     void initToolBoxHeaders();
     void initFileSystemModel();
 
-    void on_listViewFileSystem_doubleClicked(const QModelIndex &index);
+    void on_listViewFileSystem_doubleClicked(const QModelIndex &proxyIndex);
 
 protected:
     void closeEvent(QCloseEvent *) override;
@@ -43,6 +45,7 @@ private:
     int previousIndex;
 
     QFileSystemModel *fileSystemModel;
+    QSortFilterProxyModel *proxyModel;
 
     QSystemTrayIcon *trayIcon;
 };

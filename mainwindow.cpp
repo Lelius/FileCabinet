@@ -72,29 +72,7 @@ void MainWindow::initSystemTray()
     connect(actCloseTheProgramm, &QAction::triggered, [=]() {this->hide(); this->close();} );
     connect(trayIcon, &QSystemTrayIcon::activated, [=](QSystemTrayIcon::ActivationReason reason)
                                                         {if (reason == QSystemTrayIcon::DoubleClick)
-        {this->isVisible() ? this->hide() : this->show();} } );
-}
-
-
-void MainWindow::initToolBoxHeaders()
-{
-    ui->toolBox->setItemText(0, "Выдача копий");
-    ui->toolBox->setItemText(1, "Учет копий");
-    ui->toolBox->setItemText(2, "Учет изменений");
-    ui->toolBox->setItemText(3, "Применяемость");
-}
-
-
-void MainWindow::initFileSystemModel()
-{
-    fileSystemModel = new QFileSystemModel(this);
-    fileSystemModel->setFilter(QDir::QDir::AllEntries);
-    fileSystemModel->setRootPath(QDir::currentPath());
-    ui->listViewFileSystem->setModel(fileSystemModel);
-    ui->listViewFileSystem->setRootIndex(fileSystemModel->index(QDir::currentPath()));
-
-    ui->lineEditFileSystem->setText(QDir::currentPath());
-    ui->lineEditFileSystem->setReadOnly(true);
+                                                           {this->isVisible() ? this->hide() : this->show();} } );
 }
 
 
@@ -115,24 +93,53 @@ void MainWindow::closeEvent(QCloseEvent *event)
 }
 
 
-void MainWindow::on_listViewFileSystem_doubleClicked(const QModelIndex &index)
+void MainWindow::initToolBoxHeaders()
 {
+    ui->toolBox->setItemText(0, "Выдача копий");
+    ui->toolBox->setItemText(1, "Учет копий");
+    ui->toolBox->setItemText(2, "Учет изменений");
+    ui->toolBox->setItemText(3, "Применяемость");
+}
+
+
+void MainWindow::initFileSystemModel()
+{
+    fileSystemModel = new QFileSystemModel(this);
+    proxyModel = new QSortFilterProxyModel(this);
+
+
+    fileSystemModel->setFilter(QDir::QDir::AllEntries);
+    fileSystemModel->setRootPath(QDir::currentPath());
+
+    proxyModel->setSourceModel(fileSystemModel);
+
+    ui->listViewFileSystem->setModel(proxyModel);
+    ui->listViewFileSystem->setRootIndex(proxyModel->mapFromSource(fileSystemModel->index(QDir::currentPath())));
+
+    ui->lineEditFileSystem->setText(QDir::currentPath());
+    ui->lineEditFileSystem->setReadOnly(true);
+}
+
+
+void MainWindow::on_listViewFileSystem_doubleClicked(const QModelIndex &proxyIndex)
+{
+    QModelIndex index = proxyModel->mapToSource(proxyIndex);
     QFileInfo fileInfo = fileSystemModel->fileInfo(index);
     QString stringFileSystem = "";
     QDir dir = fileInfo.dir();
 
     if (fileInfo.fileName() == "..") {
         dir.cdUp();
-        ui->listViewFileSystem->setRootIndex(fileSystemModel->index(dir.absolutePath()));
+        ui->listViewFileSystem->setRootIndex(proxyModel->mapFromSource(fileSystemModel->index(dir.absolutePath())));
     }
     else if (fileInfo.fileName() == ".") {
-        ui->listViewFileSystem->setRootIndex(fileSystemModel->index(""));
+        ui->listViewFileSystem->setRootIndex(proxyModel->mapFromSource(fileSystemModel->index("")));
     }
     else if (fileInfo.isDir()) {
-        ui->listViewFileSystem->setRootIndex(index);
+        ui->listViewFileSystem->setRootIndex(proxyModel->mapFromSource(index));
     }
 
     ui->lineEditFileSystem->clear();
-    fileInfo = fileSystemModel->fileInfo(ui->listViewFileSystem->rootIndex());
+    fileInfo = fileSystemModel->fileInfo(proxyModel->mapToSource(ui->listViewFileSystem->rootIndex()));
     ui->lineEditFileSystem->setText(fileInfo.absoluteFilePath());
 }
