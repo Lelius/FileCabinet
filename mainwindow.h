@@ -8,8 +8,9 @@
 #include <QMessageBox>
 #include <QDir>
 #include <QFileInfo>
-#include <QSortFilterProxyModel>
 #include <QModelIndex>
+
+#include <mysortfilterproxymodel.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -45,7 +46,7 @@ private:
     int previousIndex;
 
     QFileSystemModel *fileSystemModel;
-    QSortFilterProxyModel *proxyModel;
+    MySortFilterProxyModel *proxyModel;
 
     QSystemTrayIcon *trayIcon;
 };

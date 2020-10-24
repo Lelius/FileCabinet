@@ -17,10 +17,12 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    mysortfilterproxymodel.cpp
 
 HEADERS += \
-    mainwindow.h
+    mainwindow.h \
+    mysortfilterproxymodel.h
 
 FORMS += \
     mainwindow.ui

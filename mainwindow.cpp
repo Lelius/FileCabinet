@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "mysortfilterproxymodel.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -105,13 +106,14 @@ void MainWindow::initToolBoxHeaders()
 void MainWindow::initFileSystemModel()
 {
     fileSystemModel = new QFileSystemModel(this);
-    proxyModel = new QSortFilterProxyModel(this);
+    proxyModel = new MySortFilterProxyModel(this);
 
 
     fileSystemModel->setFilter(QDir::QDir::AllEntries);
     fileSystemModel->setRootPath(QDir::currentPath());
 
     proxyModel->setSourceModel(fileSystemModel);
+    proxyModel->sort(0, Qt::AscendingOrder);
 
     ui->listViewFileSystem->setModel(proxyModel);
     ui->listViewFileSystem->setRootIndex(proxyModel->mapFromSource(fileSystemModel->index(QDir::currentPath())));
