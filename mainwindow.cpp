@@ -113,7 +113,8 @@ void MainWindow::initFileSystemModel()
     fileSystemModel->setRootPath(QDir::currentPath());
 
     proxyModel->setSourceModel(fileSystemModel);
-    proxyModel->sort(0, Qt::AscendingOrder);
+    proxyModel->setSortCaseSensitivity(Qt::CaseInsensitive);
+    proxyModel->sort(1, Qt::AscendingOrder);
 
     ui->listViewFileSystem->setModel(proxyModel);
     ui->listViewFileSystem->setRootIndex(proxyModel->mapFromSource(fileSystemModel->index(QDir::currentPath())));
@@ -140,6 +141,8 @@ void MainWindow::on_listViewFileSystem_doubleClicked(const QModelIndex &proxyInd
     else if (fileInfo.isDir()) {
         ui->listViewFileSystem->setRootIndex(proxyModel->mapFromSource(index));
     }
+
+    proxyModel->sort(1,Qt::AscendingOrder);
 
     ui->lineEditFileSystem->clear();
     fileInfo = fileSystemModel->fileInfo(proxyModel->mapToSource(ui->listViewFileSystem->rootIndex()));
