@@ -16,13 +16,25 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    applicabilitycard.cpp \
+    cardinformation.cpp \
+    changeaccountingcard.cpp \
+    copyaccounting.cpp \
+    issuanceofcopies.cpp \
     main.cpp \
     mainwindow.cpp \
-    mysortfilterproxymodel.cpp
+    mysortfilterproxymodel.cpp \
+    workwithdatabase.cpp
 
 HEADERS += \
+    applicabilitycard.h \
+    cardinformation.h \
+    changeaccountingcard.h \
+    copyaccounting.h \
+    issuanceofcopies.h \
     mainwindow.h \
-    mysortfilterproxymodel.h
+    mysortfilterproxymodel.h \
+    workwithdatabase.h
 
 FORMS += \
     mainwindow.ui
