@@ -1,4 +1,4 @@
-QT       += core gui
+QT       += core gui sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -21,6 +21,7 @@ SOURCES += \
     changeaccountingcard.cpp \
     copyaccounting.cpp \
     issuanceofcopies.cpp \
+    listcardinformation.cpp \
     main.cpp \
     mainwindow.cpp \
     mysortfilterproxymodel.cpp \
@@ -32,6 +33,7 @@ HEADERS += \
     changeaccountingcard.h \
     copyaccounting.h \
     issuanceofcopies.h \
+    listcardinformation.h \
     mainwindow.h \
     mysortfilterproxymodel.h \
     workwithdatabase.h
