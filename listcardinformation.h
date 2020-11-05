@@ -12,13 +12,13 @@ class ListCardInformation : public QObject
 public:
     explicit ListCardInformation(QObject *parent = nullptr);
 
-    QVector<CardInformation> getListAllCardInformation();
-    void setListAllCardInformation(const QVector<CardInformation> &);
+    QVector<CardInformation> * getListAllCardInformation();
+    void setListAllCardInformation(QVector<CardInformation> *);
 
 signals:
 
 private:
-    QVector<CardInformation> listAllCardInformation;
+    QVector<CardInformation> *listAllCardInformation;
 
 };
 
